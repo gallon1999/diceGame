@@ -15,7 +15,7 @@ bool isAllPlayerBet( void )
 }
 
 
-int main() // test
-{
+// int main() // test
+// {
     
-}
+// }
