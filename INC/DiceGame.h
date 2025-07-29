@@ -4,7 +4,9 @@
 
 #include <stdbool.h>
 
-#if defined(DICE_H)
+#ifdef DICE_IMPLEMENT
+#define _DICEGAME_DEC_
+#else
 #define _DICEGAME_DEC_ extern
 #endif
 
@@ -14,5 +16,7 @@
 
 
 _DICEGAME_DEC_ bool isAllPlayerBet( void );
+_DICEGAME_DEC_ void gameStart( void );
+_DICEGAME_DEC_ void gameSetup( void );
 
 #endif
