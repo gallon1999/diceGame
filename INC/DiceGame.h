@@ -12,11 +12,12 @@
 
 #define MAX_PLAYER 10
 #define MIN_PLAYER 2
+#define HOST_PLAYER 0
+#define DICE_NUM 4
 
-
-
+/*
 _DICEGAME_DEC_ bool isAllPlayerBet( void );
 _DICEGAME_DEC_ void gameStart( void );
 _DICEGAME_DEC_ void gameSetup( void );
-
+*/
 #endif
