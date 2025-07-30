@@ -19,5 +19,9 @@
 _DICEGAME_DEC_ bool isAllPlayerBet( void );
 _DICEGAME_DEC_ void gameStart( void );
 _DICEGAME_DEC_ void gameSetup( void );
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> 07abe44e906ad50504769abf6d0328b4dc87c435
 #endif
