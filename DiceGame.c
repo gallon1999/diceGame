@@ -26,24 +26,24 @@ void gameSetup( void )
  * It prints all players' money and asks each player to enter their bet
  * (except player 0(Host)) The number of players is returned for later use
  */
-int8_t gameStart(int8_t* money, int8_t* player_bet)
+int32_t gameStart(int32_t* money, int32_t* player_bet)
 {   
-    uint8_t players = 0;                                // init player number
+    uint32_t players = 0;                                // init player number
     printf("type in how many players: ");
-    scanf("%hhu", &players);
+    scanf("%u", &players);
 
-    for (uint8_t i = 0; i < players; i++) {
+    for (uint32_t i = 0; i < players; i++) {
         money[i] = 100;                             // init player's money amount
     }
 
     printf("player's money: ");
-    for(uint8_t i = 0; i < 10; i++){
+    for(uint32_t i = 0; i < 10; i++){
         printf("%d,",money[i]);
     }
     printf("\n");
-    for (uint8_t player_num = 1;player_num < players; player_num++){
+    for (uint32_t player_num = 1;player_num < players; player_num++){
         printf("player NO.%d bet: ", player_num);
-        scanf("%hhu", &player_bet[player_num]);
+        scanf("%u", &player_bet[player_num]);
     }
 
     return players;
@@ -55,14 +55,14 @@ int8_t gameStart(int8_t* money, int8_t* player_bet)
  * Press 'Enter' buttom to generator 4 ramdom numbers(1 ~ 6)
  * save numbers into dice_number array, and then print them in terminal
  */
-int8_t roll_the_dice(int8_t* dice_number)
+int32_t roll_the_dice(int32_t* dice_number)
 {
     printf("press 'enter' buttom to roll the dice!\n");
     getchar();
     getchar();
     srand(clock());
-    for(uint8_t i = 0; i < 4; i++){
-        uint8_t r = rand() % 6;
+    for(uint32_t i = 0; i < 4; i++){
+        uint32_t r = rand() % 6;
         dice_number[i] = r + 1;
     }
      printf("dice number is: %d %d %d %d\n", dice_number[0], dice_number[1], dice_number[2], dice_number[3]);
@@ -78,16 +78,16 @@ int8_t roll_the_dice(int8_t* dice_number)
  * Roll all dice different need to re-roll the dice
  * save score value for later use
  */
-int8_t calculate_score(int8_t* dice_number) 
+int32_t calculate_score(int32_t* dice_number) 
 {
-    int8_t score = 0;
-    uint8_t count[7] = {0};  // index 1~6 使用，代表數字 1~6 出現次數
-    for (uint8_t i = 0; i < DICE_NUM; i++) {
+    int32_t score = 0;
+    uint32_t count[7] = {0};  // index 1~6 使用，代表數字 1~6 出現次數
+    for (uint32_t i = 0; i < DICE_NUM; i++) {
         count[dice_number[i]]++;
     }
 
-    uint8_t single_dice = 0;
-    for(uint8_t i = 0; i < 7; i++)//判斷骰子相同次數
+    uint32_t single_dice = 0;
+    for(uint32_t i = 0; i < 7; i++)//判斷骰子相同次數
     {
         if(count[i] == 4)//四顆骰子點數相同
         {
@@ -98,10 +98,10 @@ int8_t calculate_score(int8_t* dice_number)
 
         if(count[i] == 3)//三顆骰子點數相同
         {
-            uint8_t dice_3_same = 0;
-            uint8_t dice_1_diff = 0;
+            uint32_t dice_3_same = 0;
+            uint32_t dice_1_diff = 0;
             dice_3_same = i;
-            for(uint8_t j=0; j < 7; j++){
+            for(uint32_t j=0; j < 7; j++){
                 if(count[j] == 1)
                 dice_1_diff = j;
             }
@@ -112,9 +112,9 @@ int8_t calculate_score(int8_t* dice_number)
 
         if(count[i] == 2)//兩顆骰子點數相同
         {   
-            uint8_t pair1 = 0, pair2 = 0, single1 = 0, single2 = 0;
+            uint32_t pair1 = 0, pair2 = 0, single1 = 0, single2 = 0;
             pair1 = i;
-            for(uint8_t j = 6; j > 0; j--)// 2 pair狀況
+            for(uint32_t j = 6; j > 0; j--)// 2 pair狀況
             {
                 if(count[j] == 2 && j != pair1){
                     pair2 = j;
@@ -124,8 +124,8 @@ int8_t calculate_score(int8_t* dice_number)
 
             if(pair2 == 0)      // 1 pair + 2 signle
             {   
-                uint8_t single_time = 0;
-                for(uint8_t k = 0; k < 7; k++){
+                uint32_t single_time = 0;
+                for(uint32_t k = 0; k < 7; k++){
                     if(count[k] == 1 && single_time == 0){
                         single1 = k;
                         single_time = single_time + 1;
@@ -170,10 +170,10 @@ int8_t calculate_score(int8_t* dice_number)
  * print the dice result from roll_the_dice
  * no any value save for later use
  */
-void print_dice(int8_t* dice_number) //debug用功能
+void print_dice(int32_t* dice_number) //debug用功能
 {
     printf("Dice: ");
-    for (uint8_t i = 0; i < DICE_NUM; i++) {
+    for (uint32_t i = 0; i < DICE_NUM; i++) {
         printf("%d ", dice_number[i]);
     }
     printf("\n");
@@ -187,15 +187,15 @@ void print_dice(int8_t* dice_number) //debug用功能
  * 
  * Prints a win or lose message based on the result
  */
-int player_win_lose(uint8_t players, int8_t* player_score)
+int player_win_lose(uint32_t players, int32_t* player_score)
 {
     printf("All palyers bet, let's roll the dice!\n");
-    for(uint8_t player_num = 0; player_num < players; player_num++){           //第n個玩家骰骰子，第一個莊家NO.0
+    for(uint32_t player_num = 0; player_num < players; player_num++){           //第n個玩家骰骰子，第一個莊家NO.0
         printf("~~~~~~~~~~~~~~Let's switch the dice~~~~~~~~~~~~~~\n");
         printf("Player NO.%d roll the dice!\n",player_num);
-        int8_t score = -1;
+        int32_t score = -1;
         while(score < 0){                       //骰子點數是否有效
-            int8_t dice_number[DICE_NUM] = {0};
+            int32_t dice_number[DICE_NUM] = {0};
             roll_the_dice(dice_number);
             score = calculate_score(dice_number);
             player_score[player_num] = score;            //將有效點數存起來
@@ -220,10 +220,10 @@ int player_win_lose(uint8_t players, int8_t* player_score)
 }
 
 int main(){
-    int8_t money[MAX_PLAYER] = {0};                        //save money amount for all players
-    int8_t player_bet[MAX_PLAYER] = {0};                   //save every players' bet(except player 0(Host))
-    int8_t player_score[MAX_PLAYER] = {0};                 //save every players' score
-    int8_t players = gameStart(money, player_bet);
+    int32_t money[MAX_PLAYER] = {0};                        //save money amount for all players
+    int32_t player_bet[MAX_PLAYER] = {0};                   //save every players' bet(except player 0(Host))
+    int32_t player_score[MAX_PLAYER] = {0};                 //save every players' score
+    int32_t players = gameStart(money, player_bet);
     player_win_lose(players, player_score);
     return 0;
 }   //test
